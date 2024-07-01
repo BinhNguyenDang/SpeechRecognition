@@ -1,7 +1,7 @@
 
 # Demo
 
-[![Watch the video](app/assets/images/thumbnail.png)](https://github.com/BinhNguyenDang/SpeechRecognition/assets/146049423/20c56f9a-a47a-4560-a
+[![Watch the video](thumbnail.png)](https://github.com/BinhNguyenDang/SpeechRecognition/assets/146049423/20c56f9a-a47a-4560-a221-49521b525688)
 
 
 https://github.com/BinhNguyenDang/SpeechRecognition/assets/146049423/20c56f9a-a47a-4560-a221-49521b525688
