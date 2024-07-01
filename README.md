@@ -1,6 +1,9 @@
 
 # Demo
 
+[![Watch the video](app/assets/images/thumbnail.png)](https://github.com/BinhNguyenDang/SpeechRecognition/assets/146049423/20c56f9a-a47a-4560-a
+
+
 https://github.com/BinhNguyenDang/SpeechRecognition/assets/146049423/20c56f9a-a47a-4560-a221-49521b525688
 --------------------------------------------------------------------------------------
 This is a way to set up SSL fast for localhost in a Ruby on Rails 7 app.
