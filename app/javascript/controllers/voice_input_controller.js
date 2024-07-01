@@ -90,6 +90,77 @@ export default class extends Controller {
   }
 
     /**
+   * Extracts final and interim transcripts from the SpeechRecognitionEvent.
+   *
+   * @param {SpeechRecognitionEvent} event - The event object containing the recognition results.
+   * @returns {Object} An object containing the final and interim transcripts.
+   */
+  extractTranscripts(event){
+      let final_transcript = "";
+      let interim_transcript = "";
+
+      // Loop through the recognition results
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        // Check if the result is final
+        if (event.results[i].isFinal){
+          // Append the transcript to the final transcript
+          final_transcript += event.results[i][0].transcript;
+        } else {
+          // Append the transcript to the interim transcript
+          interim_transcript += event.results[i][0].transcript;
+        }
+      }
+
+      // Return the final and interim transcripts as an object
+      return {
+        finalTranscript: final_transcript,
+        interimTranscript: interim_transcript,
+      };
+    }
+
+      /**
+   * Updates the input value with the final and interim transcripts.
+   *
+   * @param {string} finalTranscript - The final transcript received from the speech recognition process.
+   * @param {string} interimTranscript - The interim transcript received from the speech recognition process.
+   * @returns {void} - No return value.
+   */
+  updateInputValue(finalTranscript, interimTranscript){
+    const input = this.inputTarget;
+    const selectionStart = input.selectionStart;
+    const selectionEnd = input.selectionEnd;
+
+    const currentValue = input.value;
+    const beforeSelection = currentValue.substring(0, selectionStart);
+    const afterSelection = currentValue.substring(selectionEnd);
+
+    const updatedValue = beforeSelection + finalTranscript + afterSelection;
+    input.value = updatedValue;
+    input.selectionStart = input.selectionEnd = selectionStart + finalTranscript.length;
+
+    const updatedSelectionStart = selectionStart + finalTranscript.length;
+    const updatedSelectionEnd = updatedSelectionStart + interimTranscript.length;
+    input.setSelectionRange(updatedSelectionStart, updatedSelectionEnd);
+  }
+
+
+  record(){
+    if (!this.speechRecognition){
+      console.error("Speech recognition is not available");
+      return;
+    }
+
+    const startButton = this.startButtonTarget;
+    if(this.speaking){
+      this.stopRecording();
+      startButton.textContent = "Start Voice Input";
+    } else {
+      this.startRecording();
+      startButton.textContent = "Stop Voice Input";
+    }
+  }
+
+    /**
    * Stops the recording and sets the speaking flag to false.
    *
    * @returns {void}
